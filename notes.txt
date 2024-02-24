@@ -1,0 +1,7 @@
+Melhorias
+- Arquitetura: Dividir o código/projeto em camadas cada com suas responsabilidades
+- Separar entidades do banco de dados das informações necessárias que precisam ser enviadas
+  - Exemplo: Ao enviar os dados do usuário não podemos enviar a senha ou outras informações confidenciais
+  - Mapear entidade em outra classe para resposta/retorno. Pesquisar "AutoMap"
+- Utilizar código assíncrono / Tasks
+
