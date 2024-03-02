@@ -1,7 +1,17 @@
-Melhorias
+# Melhorias
+
+## Aula 01
 - Arquitetura: Dividir o código/projeto em camadas cada com suas responsabilidades
 - Separar entidades do banco de dados das informações necessárias que precisam ser enviadas
   - Exemplo: Ao enviar os dados do usuário não podemos enviar a senha ou outras informações confidenciais
   - Mapear entidade em outra classe para resposta/retorno. Pesquisar "AutoMap"
 - Utilizar código assíncrono / Tasks
 
+## Aula 02
+- Injeção de dependências
+  - Estudar outros métodos: Scopped, Transet, Singleton
+- Tratar messagem de erro e enviar no idioma de acordo com a localização do usuário
+- Validação de erros nos dados da request. Exemplos:
+  - Criação do oferta:
+    - O lance do usuário não pode ser menor que 0 ou negativo
+- Melhorar o sistema de autenticação / atributo de autorização. Utilizar a abordagem do JWT, por exemplo.

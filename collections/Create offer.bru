@@ -1,0 +1,21 @@
+meta {
+  name: Create offer
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://localhost:7237/Offer/2
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: Y3Jpc3RpYW5vQGNyaXN0aWFuby5jb20y
+}
+
+body:json {
+  {
+    "price": 100
+  }
+}
