@@ -15,3 +15,6 @@
   - Criação do oferta:
     - O lance do usuário não pode ser menor que 0 ou negativo
 - Melhorar o sistema de autenticação / atributo de autorização. Utilizar a abordagem do JWT, por exemplo.
+
+## Aula 03
+- Boa prática ter uma interface para cada Use Case. Modificar no Program.cs

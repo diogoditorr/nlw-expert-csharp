@@ -1,21 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RocketseatAuction.API.Communication.Requests;
+﻿using RocketseatAuction.API.Communication.Requests;
+using RocketseatAuction.API.Contracts;
 using RocketseatAuction.API.Entities;
-using RocketseatAuction.API.Repositories;
 using RocketseatAuction.API.Services;
 
 namespace RocketseatAuction.API.UseCases.Auctions.GetCurrent;
 
 public class CreateOfferUserCase
 {
-    private readonly LoggedUser _loggedUser;
+    private readonly ILoggedUser _loggedUser;
+    private readonly IOfferRepository _repository;
 
-    public CreateOfferUserCase(LoggedUser loggedUser) => _loggedUser = loggedUser;
+    public CreateOfferUserCase(ILoggedUser loggedUser, IOfferRepository repository) {
+        _loggedUser = loggedUser;
+        _repository = repository;
+    }
 
     public int Execute(int itemId, RequestCreateOfferJson request)
     {
-        var repository = new RocketseatAuctionDbContext();
-
         var user = _loggedUser.User();
 
         var offer = new Offer
@@ -26,9 +27,7 @@ public class CreateOfferUserCase
             UserId = user.Id,
         };
 
-        repository.Offers.Add(offer);
-
-        repository.SaveChanges();
+        _repository.Add(offer);
 
         return offer.Id;
     }

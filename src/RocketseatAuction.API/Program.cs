@@ -1,5 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using RocketseatAuction.API.Contracts;
 using RocketseatAuction.API.Filters;
+using RocketseatAuction.API.Repositories;
+using RocketseatAuction.API.Repositories.DataAccess;
 using RocketseatAuction.API.Services;
 using RocketseatAuction.API.UseCases.Auctions.GetCurrent;
 
@@ -28,7 +33,7 @@ builder.Services.AddSwaggerGen(options =>
         {
             new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference 
+                Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
@@ -43,8 +48,19 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddScoped<AuthenticationUserAttribute>();
-builder.Services.AddScoped<LoggedUser>();
+builder.Services.AddScoped<ILoggedUser, LoggedUser>();
 builder.Services.AddScoped<CreateOfferUserCase>();
+builder.Services.AddScoped<GetCurrentAuctionUseCase>();
+builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddDbContext<RocketseatAuctionDbContext>(options =>
+{
+    var DatabasePath = Environment.GetEnvironmentVariable("SQLITE_DATABASE_PATH");
+
+    options.UseSqlite($@"Data Source={DatabasePath}");
+});
 
 builder.Services.AddHttpContextAccessor();
 

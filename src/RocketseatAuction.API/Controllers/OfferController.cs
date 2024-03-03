@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RocketseatAuction.API.Communication.Requests;
 using RocketseatAuction.API.Filters;
+using RocketseatAuction.API.Services;
 using RocketseatAuction.API.UseCases.Auctions.GetCurrent;
 
 namespace RocketseatAuction.API.Controllers;
@@ -15,7 +16,7 @@ public class OfferController : RocketseatAuctionBaseController
         [FromBody] RequestCreateOfferJson request,
         [FromServices] CreateOfferUserCase useCase)
     {
-        var offerId = useCase.Execute(itemId, request); 
+        var offerId = useCase.Execute(itemId, request);
 
         return Created(string.Empty, offerId);
     }
